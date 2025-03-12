@@ -1,0 +1,56 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  height: 100%;
+  width: 100%;
+  background: #242424;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.task-box {
+  padding: 0.5rem 1rem;
+  background: #474747;
+  border: 0;
+  color: white;
+  width: 42rem;
+}
+
+.task-box:focus {
+  outline: 2px solid #b7b7ff;
+}
+
+.add-task-btn {
+  background-color: yellow;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+.tasks-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.task {
+  padding: 1rem 2rem;
+  margin-top: 2rem;
+  background-color: #474747;
+}
+
+.del-btn {
+  margin-left: 1rem;
+}
