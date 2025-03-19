@@ -11,6 +11,18 @@ for (const taskss of getTasks) {
   delBtn.innerText = "Delete";
   newSpan.innerText = taskss.content;
   newDiv.classList.add("task");
+  delBtn.addEventListener("click", () => {
+    const spanTask = event.target.parentElement.querySelector("span");
+    let getTask3 = JSON.parse(localStorage.getItem("alltasks"));
+    for (let t in getTask3) {
+      if (getTask3[t].content == spanTask.innerText) {
+        getTask3.splice(t, 1);
+        break;
+      }
+    }
+    localStorage.setItem("alltasks", JSON.stringify(getTask3));
+    event.target.parentElement.remove();
+  });
   taskList.appendChild(newDiv);
 }
 
@@ -31,21 +43,33 @@ taskbtn.addEventListener("click", () => {
     newDiv.appendChild(newSpan);
     newDiv.appendChild(delBtn);
     delBtn.innerText = "Delete";
+    delBtn.addEventListener("click", () => {
+      const spanTask = event.target.parentElement.querySelector("span");
+      let getTask3 = JSON.parse(localStorage.getItem("alltasks"));
+      for (let t in getTask3) {
+        if (getTask3[t].content == spanTask.innerText) {
+          getTask3.splice(t, 1);
+          break;
+        }
+      }
+      localStorage.setItem("alltasks", JSON.stringify(getTask3));
+      event.target.parentElement.remove();
+    });
     newSpan.innerText = taskss.content;
     newDiv.classList.add("task");
     taskList.appendChild(newDiv);
   }
 });
 
-const delBtns = document.querySelectorAll(".del-btn");
+/*const delBtns = document.querySelectorAll(".del-btn");
 
 delBtns.forEach((btn, index) => {
   btn.addEventListener("click", (event) => {
     let getTasks2 = JSON.parse(localStorage.getItem("alltasks"));
-    console.log(getTasks2);
+    console.log("getTasks2-->",getTasks2);
     getTasks2.splice(index, 1);
-    console.log(getTasks2);
+    console.log("getTasks2-->",getTasks2);
     localStorage.setItem("alltasks", JSON.stringify(getTasks2));
     event.target.parentElement.remove();
   });
-});
+});*/
