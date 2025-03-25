@@ -1,6 +1,21 @@
 let getTasks = JSON.parse(localStorage.getItem("alltasks")) || [];
 const taskList = document.querySelector(".tasks-list");
 
+taskList.addEventListener("click", (event) => {
+  if (event.target.innerText === "Delete") {
+    const spanTask = event.target.parentElement.querySelector("span");
+    let getTask3 = JSON.parse(localStorage.getItem("alltasks"));
+    for (let t in getTask3) {
+      if (getTask3[t].content == spanTask.innerText) {
+        getTask3.splice(t, 1);
+        break;
+      }
+    }
+    localStorage.setItem("alltasks", JSON.stringify(getTask3));
+    event.target.parentElement.remove();
+  }
+});
+
 for (const taskss of getTasks) {
   const newDiv = document.createElement("div");
   const newSpan = document.createElement("span");
@@ -11,7 +26,7 @@ for (const taskss of getTasks) {
   newDiv.appendChild(newSpan);
   newDiv.appendChild(editBtn);
   newDiv.appendChild(delBtn);
-  editBtn.innerText="Edit";
+  editBtn.innerText = "Edit";
   delBtn.innerText = "Delete";
   newSpan.innerText = taskss.content;
   newDiv.classList.add("task");
@@ -37,23 +52,8 @@ taskbtn.addEventListener("click", () => {
     newDiv.appendChild(newSpan);
     newDiv.appendChild(editBtn);
     newDiv.appendChild(delBtn);
-    editBtn.innerText="Edit";
+    editBtn.innerText = "Edit";
     delBtn.innerText = "Delete";
-    delBtn.addEventListener("click",()=>{
-	const spanTask = event.target.parentElement.querySelector('span');
-	let getTask3 = JSON.parse(localStorage.getItem("alltasks"));
-	for(let t in getTask3)
-	{
-		if(getTask3[t].content == spanTask.innerText)
-		{
-			getTask3.splice(t,1);
-			break;
-		}
-		
-	}
-	localStorage.setItem("alltasks",JSON.stringify(getTask3));
-	event.target.parentElement.remove();
-    });
     newSpan.innerText = taskss.content;
     newDiv.classList.add("task");
     taskList.appendChild(newDiv);
