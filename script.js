@@ -16,22 +16,7 @@ taskList.addEventListener("click", (event) => {
   }
 });
 
-for (const taskss of getTasks) {
-  const newDiv = document.createElement("div");
-  const newSpan = document.createElement("span");
-  const delBtn = document.createElement("button");
-  const editBtn = document.createElement("button");
-  editBtn.classList.add("edit-btn");
-  delBtn.classList.add("del-btn");
-  newDiv.appendChild(newSpan);
-  newDiv.appendChild(editBtn);
-  newDiv.appendChild(delBtn);
-  editBtn.innerText = "Edit";
-  delBtn.innerText = "Delete";
-  newSpan.innerText = taskss.content;
-  newDiv.classList.add("task");
-  taskList.appendChild(newDiv);
-}
+displaytasks();
 
 const taskbtn = document.querySelector(".add-task-btn");
 
@@ -42,6 +27,10 @@ taskbtn.addEventListener("click", () => {
   localStorage.setItem("alltasks", JSON.stringify(savedTasks));
   getTasks = JSON.parse(localStorage.getItem("alltasks"));
   taskList.innerHTML = "";
+  displaytasks();
+});
+
+function displaytasks() {
   for (const taskss of getTasks) {
     const newDiv = document.createElement("div");
     const newSpan = document.createElement("span");
@@ -58,4 +47,4 @@ taskbtn.addEventListener("click", () => {
     newDiv.classList.add("task");
     taskList.appendChild(newDiv);
   }
-});
+}
