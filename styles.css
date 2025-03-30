@@ -22,7 +22,7 @@ body {
   align-items: center;
 }
 
-.task-box {
+#task-box {
   padding: 0.5rem 1rem;
   background: #474747;
   border: 0;
@@ -30,7 +30,7 @@ body {
   width: 42rem;
 }
 
-.task-box:focus {
+#task-box:focus {
   outline: 2px solid #b7b7ff;
 }
 
@@ -51,6 +51,6 @@ body {
   background-color: #474747;
 }
 
-.del-btn {
+.ml-1 {
   margin-left: 1rem;
 }

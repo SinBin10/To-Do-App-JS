@@ -18,16 +18,12 @@ taskList.addEventListener("click", (event) => {
 
 displaytasks();
 
-const taskbtn = document.querySelector(".add-task-btn");
+document.querySelector("#task-box").addEventListener("keydown", (event) => {
+  if (event.key == "Enter") addTask();
+});
 
-taskbtn.addEventListener("click", () => {
-  const taskContent = document.querySelector(".task-box");
-  let savedTasks = JSON.parse(localStorage.getItem("alltasks")) || [];
-  savedTasks.push({ id: savedTasks.length, content: taskContent.value });
-  localStorage.setItem("alltasks", JSON.stringify(savedTasks));
-  getTasks = JSON.parse(localStorage.getItem("alltasks"));
-  taskList.innerHTML = "";
-  displaytasks();
+document.querySelector(".add-task-btn").addEventListener("click", () => {
+  addTask();
 });
 
 function displaytasks() {
@@ -36,8 +32,8 @@ function displaytasks() {
     const newSpan = document.createElement("span");
     const delBtn = document.createElement("button");
     const editBtn = document.createElement("button");
-    editBtn.classList.add("edit-btn");
-    delBtn.classList.add("del-btn");
+    editBtn.classList.add("ml-1");
+    delBtn.classList.add("ml-1");
     newDiv.appendChild(newSpan);
     newDiv.appendChild(editBtn);
     newDiv.appendChild(delBtn);
@@ -47,4 +43,14 @@ function displaytasks() {
     newDiv.classList.add("task");
     taskList.appendChild(newDiv);
   }
+}
+
+function addTask() {
+  const taskContent = document.querySelector("#task-box");
+  let savedTasks = JSON.parse(localStorage.getItem("alltasks")) || [];
+  savedTasks.push({ id: savedTasks.length, content: taskContent.value });
+  localStorage.setItem("alltasks", JSON.stringify(savedTasks));
+  getTasks = JSON.parse(localStorage.getItem("alltasks"));
+  taskList.innerHTML = "";
+  displaytasks();
 }
