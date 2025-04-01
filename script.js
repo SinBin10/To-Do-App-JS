@@ -3,10 +3,10 @@ const taskList = document.querySelector(".tasks-list");
 
 taskList.addEventListener("click", (event) => {
   if (event.target.innerText === "Delete") {
-    const inputTask = event.target.parentElement.querySelector(".finaltask");
+    let getId = event.target.parentElement.getAttribute("data-id");
     let getTask3 = JSON.parse(localStorage.getItem("alltasks"));
     for (let t in getTask3) {
-      if (getTask3[t].content == inputTask.value) {
+      if (getTask3[t].id === getId) {
         getTask3.splice(t, 1);
         break;
       }
@@ -17,8 +17,8 @@ taskList.addEventListener("click", (event) => {
 
   if (event.target.innerText === "Edit") {
     const taskinput = event.target.parentElement.querySelector("input");
+    let getId = event.target.parentElement.getAttribute("data-id");
     taskinput.disabled = false;
-    const oldInputText = taskinput.value;
     taskinput.removeEventListener("keydown", handleEnterPress);
 
     function handleEnterPress(event) {
@@ -26,7 +26,7 @@ taskList.addEventListener("click", (event) => {
         console.log("enter pressed");
         let getTask3 = JSON.parse(localStorage.getItem("alltasks"));
         for (let t in getTask3) {
-          if (getTask3[t].content == oldInputText) {
+          if (getTask3[t].id == getId) {
             getTask3[t].content = taskinput.value;
             break;
           }
@@ -69,6 +69,7 @@ function displaytasks() {
     editBtn.innerText = "Edit";
     delBtn.innerText = "Delete";
     newinput.value = taskss.content;
+    newDiv.setAttribute("data-id", taskss.id);
     newDiv.classList.add("task");
     taskList.appendChild(newDiv);
   }
@@ -77,7 +78,7 @@ function displaytasks() {
 function addTask() {
   const taskContent = document.querySelector("#task-box");
   let savedTasks = JSON.parse(localStorage.getItem("alltasks")) || [];
-  savedTasks.push({ id: savedTasks.length, content: taskContent.value });
+  savedTasks.push({ id: crypto.randomUUID(), content: taskContent.value });
   localStorage.setItem("alltasks", JSON.stringify(savedTasks));
   getTasks = JSON.parse(localStorage.getItem("alltasks"));
   taskList.innerHTML = "";
